@@ -11,5 +11,8 @@ public class tester extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         System.out.println("HALLA");
+         System.out.println("HALLA");
+         System.out.println("HALLA");
+         System.out.println("HALLA");
     }
 }
