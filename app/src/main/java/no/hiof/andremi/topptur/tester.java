@@ -15,5 +15,7 @@ public class tester extends AppCompatActivity{
          System.out.println("HALLA");
          System.out.println("HALLA");
         System.out.println("HEIGUT");
+        System.out.println("HEIGUT");
+        System.out.println("HEIGUT");
     }
 }
