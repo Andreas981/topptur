@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">topptur</string>
+    <string name="hjem">Hjem</string>
+    <string name="innstillinger">Innstillinger</string>
 </resources>
