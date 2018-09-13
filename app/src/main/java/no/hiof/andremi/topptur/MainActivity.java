@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onCreateOptionsMenu(Menu menu) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.main_menu, menu);
+            getSupportActionBar().setTitle("RusleTur");
             return true;
         }
     @Override
