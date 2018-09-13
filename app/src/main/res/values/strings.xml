@@ -2,4 +2,5 @@
     <string name="app_name">topptur</string>
     <string name="hjem">Hjem</string>
     <string name="innstillinger">Innstillinger</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
