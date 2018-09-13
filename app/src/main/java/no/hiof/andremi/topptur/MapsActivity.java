@@ -22,7 +22,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //TODO 1.1 SETUP Statements to check if intents contain variables
     }
+
+    //TODO 2.1 Make method for receving a "trip" object, and display it on map
+
+    //TODO 2.2 Make method for storing tracked location (Save trip)
+
+    //TOD
 
 
     /**
@@ -43,4 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+
+
 }

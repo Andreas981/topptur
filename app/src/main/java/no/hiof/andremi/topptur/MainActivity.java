@@ -61,22 +61,21 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.btnLaunchMap:
                     //Start intent to launch map activity
-                    //TODO Make intent
                     startActivity(new Intent(getApplicationContext(),MapsActivity.class));
                     makeDebugToast("Starting map activity");
-
+                    break;
                 case R.id.btnMakeAtrip:
-                    //TODO Make activity for setting up a new trip
+                    //TODO 3.2 Make activity for setting up a new trip
                     makeDebugToast("Starting activity for a new trip");
-
+                    break;
                 case R.id.btnMyPosition:
-                    //TODO Re-purpose this button
+                    //TODO 3.3 Re-purpose this button
                     makeDebugToast("Not sure what to do");
-
+                    break;
                 case R.id.btnSettings:
-                    //TODO Make settings menu
+                    //TODO 3.4 Make settings menu
                     makeDebugToast("Imagine settings opening...");
-
+                    break;
                 default:
                     break;
 
