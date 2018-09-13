@@ -6,10 +6,13 @@
         android:id="@+id/action_home"
         android:icon="@drawable/ic_home"
         android:title="@string/hjem"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:iconTint="#fff"
+        />
     <item
         android:id="@+id/action_settings"
         android:title="@string/innstillinger"
         android:icon="@drawable/ic_action_gear"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        app:iconTint="#fff"/>
 </menu>
