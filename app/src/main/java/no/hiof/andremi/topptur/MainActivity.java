@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: onCreate");
 
-            //sfdsddsf
-
     }
 
     @Override
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("RusleTur");
             return true;
         }
+
     @Override
         public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -54,5 +54,42 @@ public class MainActivity extends AppCompatActivity {
                     return super.onOptionsItemSelected(item);
             }
         }
+
+        public void userMainMenuClicked(View view) {
+
+            switch (view.getId()) {
+
+                case R.id.btnLaunchMap:
+                    //Start intent to launch map activity
+                    //TODO Make intent
+                    startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+                    makeDebugToast("Starting map activity");
+
+                case R.id.btnMakeAtrip:
+                    //TODO Make activity for setting up a new trip
+                    makeDebugToast("Starting activity for a new trip");
+
+                case R.id.btnMyPosition:
+                    //TODO Re-purpose this button
+                    makeDebugToast("Not sure what to do");
+
+                case R.id.btnSettings:
+                    //TODO Make settings menu
+                    makeDebugToast("Imagine settings opening...");
+
+                default:
+                    break;
+
+            }
+        }
+
+
+        /*Remove me when done*/
+        //Display debug message on device
+        public void makeDebugToast(String msg){
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+
+        }
+        /*Remove me when done*/
 
 }
