@@ -1,6 +1,11 @@
 package no.hiof.andremi.topptur;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +18,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "RusleTur";
+    private int LOCATION_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.d(TAG, "onCreate: onCreate");
+
+        if(!(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            requestLocationPermission();
+        }
 
     }
 
@@ -80,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
             }
+        }
+
+        private void requestLocationPermission(){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
         }
 
 
