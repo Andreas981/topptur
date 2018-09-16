@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mItem.add("v");
         mItem.add(" ");
         mItem.add("j");
+        mItem.add("j");
 
         initRecyclerView();
 
