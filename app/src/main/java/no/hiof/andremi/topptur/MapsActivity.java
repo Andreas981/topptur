@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -29,7 +30,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private LocationListener locationListener;
 
-    private int userOption; //Default = 0 Display user location
+    public static final String TAG = "MapsActivity";
+
+    private String userOption; //Default = 0
                             //Display path = 1
                             //Start record mode = 2
 
@@ -37,14 +40,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Zoom in to requested location
     public void centerMapOnLocation(Location location){
         //Fetch coordinates from passed location
-        LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+        if(location != null) {
+            LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+            //Refresh map layout
+            mMap.clear();
 
-        //Refresh map layout
-        mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(userLocation).title("Du er her"));
 
-        mMap.addMarker(new MarkerOptions().position(userLocation).title("Du er her"));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,10));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10));
+        }
 
     }
 
@@ -70,7 +74,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //TODO 1.1 SETUP Statements to check if intents contain variables
-        userOption = 0;
+        Bundle bundle = getIntent().getExtras();
+        userOption = "0";
+
+        if(getIntent().getStringExtra("action") != null){
+            Log.d(TAG, "onCreate: TALL: " + getIntent().getExtras().get("action"));
+
+                makeDebugToast(getIntent().getStringExtra("action"));
+
+
+            userOption = getIntent().getStringExtra("action");
+
+        }
+
         makeDebugToast("Starting option: " + userOption);
     }
 
@@ -83,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if(userOption == 0){
+        if(Integer.parseInt(userOption) == 1){
             makeDebugToast("Starting retrieving of location");
 
             locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -114,26 +130,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             };
 
+
+
+            //iF user's device is older than v23 (< Marshmallow)
+            if(Build.VERSION.SDK_INT < 23){
+                if(ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+                }else{
+                    makeDebugToast("Mangler permission");
+                }
+            }else{
+                if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+
+                    Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+
+                    centerMapOnLocation(lastKnownLocation);
+                }
+            }
         }
         else {
             makeDebugToast("Missing function");
-        }
-
-        //iF user's device is older than v23 (< Marshmallow)
-        if(Build.VERSION.SDK_INT < 23){
-            if(ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
-            }else{
-                makeDebugToast("Mangler permission");
-            }
-        }else{
-            if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
-
-                Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
-
-                centerMapOnLocation(lastKnownLocation);
-            }
         }
 
 

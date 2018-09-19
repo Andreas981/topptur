@@ -44,20 +44,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initArraysForRecyclerView(){
-        mItem.add("Kart");
-        mItem.add("Start egen tur");
-        mItem.add("Min posisjon");
-        mItem.add("Innstillinger");
-        mItem.add("4");
-        mItem.add("g");
-        mItem.add("3");
-        mItem.add("q");
-        mItem.add("g");
-        mItem.add("l");
-        mItem.add("v");
-        mItem.add(" ");
-        mItem.add("j");
-        mItem.add("j");
+        mItem.add("Kart"); //Se på kartet
+        mItem.add("Planlegg tur"); //Gå til activity for å planlegge, videre til kart
+        mItem.add("Finn en tur"); //Gå til activity for å finne tur, videre til kart
+        mItem.add("Toppliste"); //Hvem har gått mest tur
+        mItem.add("Venner"); //Dine venner
+        mItem.add("Innstillinger"); //Gå til innstillinger
+
 
         initRecyclerView();
 
@@ -90,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     //return true;
 
                     //TODO 1.2: Add action for settings button
-                case R.id.action_settings:
+                case R.id.action_profile:
                     //Intent intent = new Intent(this, settings.class);
                     //startActivity(intent);
                     //return true;
@@ -103,18 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
             Button b = (Button)view;
 
-
-            if(b.getText().toString() == "Start egen tur"){
-                Log.d(TAG, "userMainMenuClicked: TEXT: " + b.getText().toString());
-            }
-
-
             switch (b.getText().toString()) {
 
                 case "Kart":
                     //Start intent to launch map activity
                     startActivity(new Intent(getApplicationContext(),MapsActivity.class));
-                    makeDebugToast("Starting map activity");
+                    makeDebugToast("Starting map activity...");
                     break;
                 case "Start egen tur":
                     //TODO 3.2 Make activity for setting up a new trip
@@ -122,7 +109,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "Min posisjon":
                     //TODO 3.3 Re-purpose this button
-                    makeDebugToast("Not sure what to do");
+                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                    intent.putExtra("action", "1");
+                    startActivity(intent);
+                    makeDebugToast("Min posisjon...");
                     break;
                 case "Innstillinger":
                     //TODO 3.4 Make settings menu

@@ -10,7 +10,7 @@
         app:iconTint="#fff"
         />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_profile"
         android:title="@string/innstillinger"
         android:icon="@drawable/ic_action_gear"
         app:showAsAction="ifRoom"
